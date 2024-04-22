@@ -7,6 +7,7 @@ package tools;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -35,4 +36,15 @@ public class Util {
 
         }
     }
+
+    public static void mensagem(String cadeia) {
+        JOptionPane.showMessageDialog(null, cadeia);
+    }
+
+    public static boolean perguntar(String cadeia) {
+        int resp = JOptionPane.showConfirmDialog(null, cadeia,
+                "Perguntar", JOptionPane.YES_NO_OPTION);
+        return false;
+    }
+
 }
