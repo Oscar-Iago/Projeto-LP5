@@ -5,6 +5,7 @@
  */
 package tools;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -30,8 +31,8 @@ public class Util {
             if (vetComp[i] instanceof JComboBox) {
                 ((JComboBox) vetComp[1]).setSelectedIndex(-1);
             }
-            if (vetComp[i] instanceof JComboBox) {
-                ((JComboBox) vetComp[1]).setSelectedIndex(-1);
+            if (vetComp[i] instanceof JCheckBox) {
+                ((JCheckBox) vetComp[1]).setSelected(false);
             }
 
         }
