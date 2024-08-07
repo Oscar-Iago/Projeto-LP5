@@ -5,11 +5,15 @@
  */
 package view;
 
+import controle.VendaControle;
+
 /**
  *
  * @author Oscar Iago
  */
 public class JDlgVendaPesquisar extends javax.swing.JDialog {
+
+    private JDlgVenda jDlgvenda;
 
     /**
      * Creates new form JDlgVendaPesquisar
@@ -17,6 +21,16 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
     public JDlgVendaPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Consulta de Venda");
+        
+        VendaControle vendaControle = new VendaControle();
+        jTable1.setModel(vendaControle);
+    }
+    
+        public void setTelaAnterior(JDlgVenda jDlgvenda) {
+        this.jDlgvenda = jDlgvenda;
+    
     }
 
     /**

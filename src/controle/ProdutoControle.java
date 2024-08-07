@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Oscar Iago
  */
-public class VendaControle extends AbstractTableModel {
+public class ProdutoControle extends AbstractTableModel {
 
     private List lista;
 
@@ -23,7 +23,7 @@ public class VendaControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -36,21 +36,22 @@ public class VendaControle extends AbstractTableModel {
             return "Id";
         }
         if (column == 1) {
-            return "Data";
+            return "Nome";
         }
         if (column == 2) {
-            return "Cliente";
+            return "Especie";
         }
         if (column == 3) {
-            return "Funcionario";
+            return "Quantidade";
         }
         if (column == 4) {
-            return "Total";
+            return "Preco";
+        }
+        if (column == 5) {
+            return "Tamanho";
         }
 
         return "";
     }
 
 }
-
-
