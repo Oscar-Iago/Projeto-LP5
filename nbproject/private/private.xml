@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/u08655026174/Documents/Projeto-LP5/Projeto-LP5/Projeto-LP5-main/src/view/JDlgUsuarios.java</file>
-            <file>file:/C:/Users/u08655026174/Documents/Projeto-LP5/Projeto-LP5/Projeto-LP5-main/src/bean/OibVenda.java</file>
-            <file>file:/C:/Users/u08655026174/Documents/Projeto-LP5/Projeto-LP5/Projeto-LP5-main/src/bean/OibUsuario.java</file>
-            <file>file:/C:/Users/u08655026174/Documents/Projeto-LP5/Projeto-LP5/Projeto-LP5-main/src/view/JDlgProduto.java</file>
-            <file>file:/C:/Users/u08655026174/Documents/Projeto-LP5/Projeto-LP5/Projeto-LP5-main/src/view/JDlgProdutoPesquisar.java</file>
+            <file>file:/C:/Users/Oscar%20Iago/Documents/GitHub/Projeto-LP5/Projeto-LP5/src/controle/VendaProdutoControle.java</file>
+            <file>file:/C:/Users/Oscar%20Iago/Documents/GitHub/Projeto-LP5/Projeto-LP5/src/view/JDlgVenda.java</file>
+            <file>file:/C:/Users/Oscar%20Iago/Documents/GitHub/Projeto-LP5/Projeto-LP5/src/controle/VendaControle.java</file>
+            <file>file:/C:/Users/Oscar%20Iago/Documents/GitHub/Projeto-LP5/Projeto-LP5/src/view/JDlgVendaPesquisar.java</file>
+            <file>file:/C:/Users/Oscar%20Iago/Documents/GitHub/Projeto-LP5/Projeto-LP5/src/dao/VendaDAO.java</file>
         </group>
     </open-files>
 </project-private>
