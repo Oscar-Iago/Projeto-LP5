@@ -26,7 +26,8 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta");
+        setTitle("Consulta")
+                ;
         funcionarioControle = new FuncionarioControle();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         List lista = funcionarioDAO.listAll();
@@ -113,10 +114,10 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        int rowSel = jTable1.getSelectedRow();
-        OibFuncionario oibFuncionario = funcionarioControle.getBean(rowSel);
-        jDlgFuncionario.beanView(oibFuncionario);
         setVisible(false);
+        int rowSel = jTable1.getSelectedRow();
+        jDlgFuncionario.beanView(funcionarioControle.getBean(rowSel));
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

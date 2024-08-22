@@ -244,8 +244,10 @@ public class JDlgFuncionario extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            funcionarioDAO.delete(viewBean());
+        }
         Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
-        Util.perguntar(null);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed

@@ -5,7 +5,8 @@
  */
 package view;
 
-import dao.VendaDAO;
+import bean.OibProduto;
+import dao.ProdutoDAO;
 import java.util.List;
 
 /**
@@ -14,19 +15,27 @@ import java.util.List;
  */
 public class JDlgVendaProduto extends javax.swing.JDialog {
 
+    JDlgVenda jDlgVenda;
+
     /**
      * Creates new form JDlgVendaProduto
      */
     public JDlgVendaProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Venda Produtos");
         jTxtTotal.setEnabled(modal);
         jTxtValorUnitario.setEnabled(modal);
-        VendaDAO vendaDAO = new VendaDAO();
-        List lista = vendaDAO.listAll();
-       
-        
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List lista = produtoDAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+            jCboProduto.addItem((OibProduto) lista.get(i));
+        }
+    }
+
+    public void setTelaAnterior(JDlgVenda jDlgVenda) {
+        this.jDlgVenda = jDlgVenda;
     }
 
     /**
@@ -41,8 +50,8 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jCboProduto = new javax.swing.JComboBox();
+        jTxtQuantidade = new javax.swing.JTextField();
+        jCboProduto = new javax.swing.JComboBox<OibProduto>();
         jTxtValorUnitario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTxtTotal = new javax.swing.JTextField();
@@ -58,15 +67,20 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Valor Unitario");
 
-        jTextField1.setText("jTextField1");
+        jTxtQuantidade.setText("1");
+        jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtQuantidadeKeyReleased(evt);
+            }
+        });
 
-        jCboProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-
-        jTxtValorUnitario.setText("jTextField2");
+        jCboProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboProdutoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Total");
-
-        jTxtTotal.setText("jTextField3");
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -93,7 +107,7 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -119,11 +133,11 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -131,7 +145,32 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        OibProduto oibProduto = (OibProduto) jCboProduto.getSelectedItem();
+        int quantidade = Integer.valueOf(jTxtQuantidade.getText());
+        double valorUnitario = Double.valueOf(jTxtValorUnitario.getText());
+        jDlgVenda.addProduto(oibProduto, quantidade, valorUnitario);
+        setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jCboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboProdutoActionPerformed
+        // TODO add your handling code here:
+        OibProduto OibProduto = (OibProduto) jCboProduto.getSelectedItem();
+        String cad = String.valueOf(OibProduto.getOibPreco());
+        jTxtValorUnitario.setText(cad);
+        jTxtTotal.setText(cad);
+    }//GEN-LAST:event_jCboProdutoActionPerformed
+
+    private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
+        // TODO add your handling code here:
+        if (jTxtQuantidade.getText().equals("") == true) {
+            jTxtTotal.setText("");
+        } else {
+            int quantidade = Integer.valueOf(jTxtQuantidade.getText());
+            double valorUnitario = Double.valueOf(jTxtValorUnitario.getText());
+            jTxtTotal.setText(String.valueOf(quantidade * valorUnitario));
+
+        }
+    }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -178,13 +217,13 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnOk;
-    private javax.swing.JComboBox jCboProduto;
+    private javax.swing.JComboBox<OibProduto> jCboProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTxtQuantidade;
     private javax.swing.JTextField jTxtTotal;
     private javax.swing.JTextField jTxtValorUnitario;
     // End of variables declaration//GEN-END:variables

@@ -19,17 +19,17 @@ public class VendaProdutoControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
 
-    public OibVendaproduto getBean(int row) {
-        return (OibVendaproduto) lista.get(row);
+    public void addList(OibVendaproduto oibVendaProduto) {
+        lista.add(oibVendaProduto);
+        this.fireTableDataChanged();
     }
 
-    public void addList(VendaProduto vendaProduto) {
-        lista.add(vendaProduto);
-    }
-    public void removeList(VendaProduto vendaProduto) {
-        lista.add(vendaProduto);
+    public void removeList(int index) {
+        lista.remove(index);
+        this.fireTableDataChanged();
     }
 
     @Override
@@ -39,27 +39,28 @@ public class VendaProdutoControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        VendaProduto vendaProduto = (VendaProduto) lista.get(rowIndex);
+        OibVendaproduto oibVendaProduto = (OibVendaproduto) lista.get(rowIndex);
         if (columnIndex == 0) {
-            return vendaProduto.getProduto().getidOibVenda();
+            return oibVendaProduto.getOibProduto().getIdOibProduto();
         }
         if (columnIndex == 1) {
-            return vendaProduto.getProduto().getidOibVenda();
+            return oibVendaProduto.getOibProduto().getOibNome();
         }
         if (columnIndex == 2) {
-            return vendaProduto.getProduto().getidOibVenda();
+            return oibVendaProduto.getOibQuantidade();
         }
         if (columnIndex == 3) {
-            return vendaProduto.getProduto().getidOibVenda();
+            return oibVendaProduto.getOibValorunitario();
         }
         if (columnIndex == 4) {
-            return vendaProduto.getProduto().getidOibVenda();
+            return oibVendaProduto.getOibQuantidade() * oibVendaProduto.getOibValorunitario();
         }
+        return"";
     }
 
     public String getColumnName(int column) {

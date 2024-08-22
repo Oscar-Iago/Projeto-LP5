@@ -19,6 +19,7 @@ public class ClientesControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
 
     public OibCliente getBean(int row) {

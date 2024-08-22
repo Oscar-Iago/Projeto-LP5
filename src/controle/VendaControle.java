@@ -19,6 +19,7 @@ public class VendaControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
 
     public OibVenda getBean(int row) {
@@ -45,10 +46,10 @@ public class VendaControle extends AbstractTableModel {
             return oibVenda.getOibData();
         }
         if( columnIndex == 2){
-            return oibVenda.getOibCliente();
+            return oibVenda.getOibCliente().getIdOibCliente();
         }
         if( columnIndex == 3){
-            return oibVenda.getOibFuncionario();
+            return oibVenda.getOibFuncionario().getIdOibFuncionario();
         }
         if( columnIndex == 4){
             return oibVenda.getOibTotal();

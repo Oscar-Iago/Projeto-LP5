@@ -31,7 +31,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jTxtQuantidade" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -65,12 +65,12 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTxtValorUnitario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTxtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,24 +91,24 @@
         <Property name="text" type="java.lang.String" value="Valor Unitario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="jTxtQuantidade">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTxtQuantidadeKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jCboProduto">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value=" "/>
-          </StringArray>
-        </Property>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCboProdutoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;OibProduto&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;OibProduto&gt;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtValorUnitario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -116,9 +116,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtTotal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>

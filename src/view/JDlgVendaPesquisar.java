@@ -113,10 +113,11 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
         int rowSel = jTable1.getSelectedRow();
         OibVenda oibVenda = vendaControle.getBean(rowSel);
         jDlgVenda.beanView(oibVenda);
-        setVisible(false);
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

@@ -184,17 +184,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAlterarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jBtnConfirmar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/gravar.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConfirmarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="jBtnExcluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -204,6 +193,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnExcluirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBtnConfirmar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/gravar.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Confirmar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConfirmarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBtnCancelar">

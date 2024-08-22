@@ -9,6 +9,7 @@ import bean.OibProduto;
 import controle.ProdutoControle;
 import dao.ProdutoDAO;
 import java.util.List;
+import tools.Util;
 
 /**
  *
@@ -27,15 +28,15 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta");
-        produtoControle = new ProdutoControle();
+        
         ProdutoDAO produtoDAO = new ProdutoDAO();
-        List lista = produtoDAO.listAll();
-        produtoControle.setList(lista);
+        produtoControle = new ProdutoControle();       
+        produtoControle.setList(produtoDAO.listAll());
         jTable1.setModel(produtoControle);
     }
 
     public void setTelaAnterior(JDlgProduto jDlgProduto) {
-
+        
         this.jDlgProduto = jDlgProduto;
 
     }
@@ -102,9 +103,9 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnOk)
-                    .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -113,10 +114,13 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        int rowSel = jTable1.getSelectedRow();
-        OibProduto oibProduto = produtoControle.getBean(rowSel);
-        jDlgProduto.beanView(oibProduto);
-        setVisible(false);
+//        if ( jTable1.getSelectedRow() == -1 ) {
+//            Util.mostrar("Nenhuma registro selecionado.");
+//        } else {
+            int rowSel = jTable1.getSelectedRow();
+            jDlgProduto.beanView(produtoControle.getBean(rowSel) );            
+            setVisible(false);
+//        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

@@ -28,7 +28,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         usuarioDAO = new UsuarioDAO();
 
-        Util.habilitar(false, jBtnConfirmar, jBtnExcluir, jTxtNome, jTxtApelido, jTxtCodigo, jCboNivel, jChbAtivo, jFmtCpf, jFmtNascimento, jPwfSenha);
+        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, jTxtNome, jTxtApelido, jTxtCodigo, jCboNivel,
+                jChbAtivo, jFmtCpf, jFmtNascimento, jPwfSenha);
     }
 
     public void beanView(OibUsuario oibUsuario) {
@@ -55,8 +56,12 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         oibUsuario.setOibCpf(jFmtCpf.getText());
         oibUsuario.setOibDatanascimento(Util.strDate(jFmtNascimento.getText()));
         oibUsuario.setOibSenha(jPwfSenha.getText());
-        oibUsuario.setOibAtivo(jChbAtivo.isSelected() == true ? "Sim" : "Não");
         oibUsuario.setOibNivel(jCboNivel.getSelectedIndex());
+        if (jChbAtivo.isSelected() == true) {
+            oibUsuario.setOibAtivo("S");
+        } else {
+            oibUsuario.setOibAtivo("N");
+        }
         return oibUsuario;
     }
 
@@ -82,14 +87,14 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jPwfSenha = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
-        jCboNivel = new javax.swing.JComboBox<String>();
+        jCboNivel = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jChbAtivo = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jBtnIncluir = new javax.swing.JButton();
         jBtnAlterar = new javax.swing.JButton();
-        jBtnConfirmar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
+        jBtnConfirmar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
 
@@ -115,7 +120,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         jLabel7.setText("Nivel");
 
-        jCboNivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel8.setText("Ativo");
 
@@ -141,15 +146,6 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         });
         jPanel1.add(jBtnAlterar);
 
-        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gravar.png"))); // NOI18N
-        jBtnConfirmar.setText("Confirmar");
-        jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnConfirmarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnConfirmar);
-
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +154,15 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jBtnExcluir);
+
+        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gravar.png"))); // NOI18N
+        jBtnConfirmar.setText("Confirmar");
+        jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConfirmarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnConfirmar);
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
@@ -265,10 +270,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtNascimento,
-                jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar, jBtnExcluir);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnCancelar);
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtNascimento,
-                jPwfSenha, jCboNivel, jChbAtivo);
+                jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnExcluir);
+//        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtNascimento,
+//                jPwfSenha, jCboNivel, jChbAtivo);
         incluindo = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
@@ -282,21 +287,25 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            usuarioDAO.delete(viewBean());
+        }
+
         Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtNascimento,
                 jPwfSenha, jCboNivel, jChbAtivo);
-        Util.perguntar(null);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         OibUsuario oibUsuario = viewBean();
         usuarioDAO = new UsuarioDAO();
+
         if (incluindo == true) {
             usuarioDAO.insert(oibUsuario);
         } else {
             usuarioDAO.update(oibUsuario);
         }
-        Util.limparCampos(jTxtNome, jTxtApelido, jTxtCodigo, jCboNivel, jChbAtivo, jFmtCpf, jFmtNascimento, jPwfSenha);
+        
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtNascimento,
                 jPwfSenha, jCboNivel, jChbAtivo, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);

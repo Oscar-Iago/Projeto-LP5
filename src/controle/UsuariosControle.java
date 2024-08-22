@@ -19,6 +19,7 @@ public class UsuariosControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
 
     public OibUsuario getBean(int row) {

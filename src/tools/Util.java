@@ -49,9 +49,11 @@ public class Util {
                 "Perguntar", JOptionPane.YES_NO_OPTION);
         return false;
     }
+    
+    
 
     public static int strInt(String cad) {
-        return 0;
+        return Integer.parseInt(cad);
     }
 
     public static String intStr(int num) {
@@ -59,11 +61,11 @@ public class Util {
     }
 
     public static double strDouble(String cad) {
-        return 0;
+        return Double.parseDouble(cad);
     }
 
     public static String doubleStr(String num) {
-        return "";
+        return String.valueOf(num);
     }
 
     public static java.util.Date strDate(String car) {

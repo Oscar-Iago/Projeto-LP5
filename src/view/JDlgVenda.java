@@ -6,7 +6,10 @@
 package view;
 
 import bean.OibCliente;
+import bean.OibFuncionario;
+import bean.OibProduto;
 import bean.OibVenda;
+import bean.OibVendaproduto;
 import controle.VendaProdutoControle;
 import dao.VendaDAO;
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         initComponents();
         setTitle("Vendas");
         setLocationRelativeTo(null);
-        vendaDAO = new VendaDAO();
+
         vendaProdutoControle = new VendaProdutoControle();
 
         vendaProdutoControle.setList(new ArrayList());
@@ -40,8 +43,13 @@ public class JDlgVenda extends javax.swing.JDialog {
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnExcluir);
     }
 
-    public void addProduto(String[] args) {
-
+    public void addProduto(OibProduto oibProduto, int quantidade, double valorUnitario) {
+        OibVendaproduto oibVendaProduto = new OibVendaproduto();
+//        vendaProduto.setPedidos(venda);
+        oibVendaProduto.setOibProduto(oibProduto);
+        oibVendaProduto.setOibQuantidade(quantidade);
+        oibVendaProduto.setOibValorunitario(valorUnitario);
+        vendaProdutoControle.addList(oibVendaProduto);
     }
 
     public void beanView(OibVenda oibVenda) {
@@ -88,7 +96,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jTxtCodigo = new javax.swing.JTextField();
         jCboCliente = new javax.swing.JComboBox<OibCliente>();
-        jCboFuncionario = new javax.swing.JComboBox<String>();
+        jCboFuncionario = new javax.swing.JComboBox<OibFuncionario>();
         jFmtData = new javax.swing.JFormattedTextField();
         jTxtTotal = new javax.swing.JTextField();
         jBtnIncluirProd = new javax.swing.JButton();
@@ -190,8 +198,18 @@ public class JDlgVenda extends javax.swing.JDialog {
         });
 
         jBtnExcluirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Excluir.png"))); // NOI18N
+        jBtnExcluirProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirProdActionPerformed(evt);
+            }
+        });
 
         jBtnAlterarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar.png"))); // NOI18N
+        jBtnAlterarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarProdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,23 +291,25 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnExcluir);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnCancelar);
+        Util.habilitar(true, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnExcluir);
         Util.limparCampos(jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario);
         incluindo = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnCancelar, jBtnConfirmar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        Util.limparCampos(jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario);
-        Util.perguntar(null);
+        //Util.limparCampos(jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario);
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            vendaDAO.delete(viewBean());
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -319,14 +339,29 @@ public class JDlgVenda extends javax.swing.JDialog {
         jDlgVendaPesquisar.setTelaAnterior(this);
         jDlgVendaPesquisar.setVisible(true);
 
-        Util.habilitar(true, jBtnCancelar, jBtnExcluir, jBtnAlterar);
-        Util.habilitar(false, jBtnPesquisar, jBtnIncluir, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnConfirmar);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
-        
+        JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
+        jDlgVendaProduto.setTelaAnterior(this);
+        jDlgVendaProduto.setVisible(true);
+
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
+
+    private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
+        // TODO add your handling code here:
+        if (Util.perguntar("Deseja excluir o produto ?") == true) {
+            vendaProdutoControle.removeList(jTable1.getSelectedRow());
+        }
+    }//GEN-LAST:event_jBtnExcluirProdActionPerformed
+
+    private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
+        // TODO add your handling code here: 
+        JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
+        jDlgVendaProduto.setTelaAnterior(this);
+        jDlgVendaProduto.setVisible(true);
+    }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +416,7 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluirProd;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<OibCliente> jCboCliente;
-    private javax.swing.JComboBox<String> jCboFuncionario;
+    private javax.swing.JComboBox<OibFuncionario> jCboFuncionario;
     private javax.swing.JFormattedTextField jFmtData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -394,4 +429,5 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtTotal;
     // End of variables declaration//GEN-END:variables
+
 }

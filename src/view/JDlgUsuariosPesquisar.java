@@ -113,10 +113,11 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
         int rowSel = jTable1.getSelectedRow();
         OibUsuario oibUsuario = usuariosControle.getBean(rowSel);
         jDlgUsuarios.beanView(oibUsuario);
-        setVisible(true);
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

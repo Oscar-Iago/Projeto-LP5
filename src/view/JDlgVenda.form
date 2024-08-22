@@ -255,7 +255,8 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;OibFuncionario&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;OibFuncionario&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFmtData">
@@ -281,6 +282,9 @@
           <Image iconType="3" name="/img/Excluir.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnExcluirProdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnAlterarProd">
       <Properties>
@@ -288,6 +292,9 @@
           <Image iconType="3" name="/img/pesquisar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAlterarProdActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

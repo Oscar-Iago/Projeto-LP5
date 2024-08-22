@@ -19,11 +19,13 @@ public class ProdutoControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
 
     public OibProduto getBean(int row) {
         return (OibProduto) lista.get(row);
     }
+
 
     @Override
     public int getRowCount() {
@@ -45,21 +47,22 @@ public class ProdutoControle extends AbstractTableModel {
             return oibProduto.getOibNome();
         }
         if (columnIndex == 2) {
-            return oibProduto.getOibEspecie();
+            return oibProduto.getOibCor();
         }
         if (columnIndex == 3) {
-            return oibProduto.getOibQuantidade();
+            return oibProduto.getOibEspecie();
         }
         if (columnIndex == 4) {
             return oibProduto.getOibPreco();
         }
         if (columnIndex == 5) {
-            return oibProduto.getOibCor();
+            return oibProduto.getOibQuantidade();
         }
 
         return "";
     }
 
+    @Override
     public String getColumnName(int column) {
         if (column == 0) {
             return "Id";
@@ -68,16 +71,16 @@ public class ProdutoControle extends AbstractTableModel {
             return "Nome";
         }
         if (column == 2) {
-            return "Especie";
+            return "Cor";
         }
         if (column == 3) {
-            return "Quantidade";
+            return "Especie";
         }
         if (column == 4) {
             return "Preco";
         }
         if (column == 5) {
-            return "Cor";
+            return "Quantidade";
         }
 
         return "";
