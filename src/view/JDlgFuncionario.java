@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.OibFuncionario;
+import dao.FuncionarioDAO;
 import tools.Util;
 
 /**
@@ -11,6 +13,9 @@ import tools.Util;
  * @author u08655026174
  */
 public class JDlgFuncionario extends javax.swing.JDialog {
+
+    boolean incluindo;
+    FuncionarioDAO funcionarioDAO;
 
     /**
      * Creates new form JDlgFuncionario
@@ -20,7 +25,32 @@ public class JDlgFuncionario extends javax.swing.JDialog {
         initComponents();
         setTitle("Funcionario");
         setLocationRelativeTo(null);
+        funcionarioDAO = new FuncionarioDAO();
+
         Util.habilitar(false, jBtnConfirmar, jBtnCancelar, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+    }
+
+    public void beanView(OibFuncionario oibFuncionario) {
+        jTxtCodigo.setText(Util.intStr(oibFuncionario.getIdOibFuncionario()));
+        jTxtNome.setText(oibFuncionario.getOibNome());
+        jTxtSobrenome.setText(oibFuncionario.getOibSobrenome());
+        jFmtCpf.setText(oibFuncionario.getOibCpf());
+        jFmtNascimento.setText(Util.dateStr(oibFuncionario.getOibDatanascimento()));
+        jFmtTelefone.setText(oibFuncionario.getOibTelefone());
+        jTxtFuncao.setText(oibFuncionario.getOibFuncao());
+
+    }
+
+    public OibFuncionario viewBean() {
+        OibFuncionario oibFuncionario = new OibFuncionario();
+        oibFuncionario.setIdOibFuncionario(Util.strInt(jTxtCodigo.getText()));
+        oibFuncionario.setOibNome(jTxtNome.getText());
+        oibFuncionario.setOibSobrenome(jTxtSobrenome.getText());
+        oibFuncionario.setOibCpf(jFmtCpf.getText());
+        oibFuncionario.setOibDatanascimento(Util.strDate(jFmtNascimento.getText()));
+        oibFuncionario.setOibTelefone(jFmtTelefone.getText());
+        oibFuncionario.setOibFuncao(jTxtFuncao.getText());
+        return oibFuncionario;
     }
 
     /**
@@ -74,26 +104,56 @@ public class JDlgFuncionario extends javax.swing.JDialog {
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
+        jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIncluirActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnIncluir);
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alterar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
+        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnAlterar);
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnExcluir);
 
         jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gravar.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
+        jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConfirmarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnConfirmar);
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnCancelar);
 
         jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnPesquisar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,9 +196,9 @@ public class JDlgFuncionario extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,9 +208,9 @@ public class JDlgFuncionario extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFmtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFmtTelefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -165,6 +225,59 @@ public class JDlgFuncionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        // TODO add your handling code here:
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento,
+                jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+        incluindo = true;
+    }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        // TODO add your handling code here:
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        incluindo = false;
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        // TODO add your handling code here:
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+        Util.perguntar(null);
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+        // TODO add your handling code here:
+        OibFuncionario oibFuncionario = viewBean();
+        funcionarioDAO = new FuncionarioDAO();
+        if (incluindo == true) {
+            funcionarioDAO.insert(oibFuncionario);
+        } else {
+            funcionarioDAO.update(oibFuncionario);
+        }
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+    }//GEN-LAST:event_jBtnConfirmarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        JDlgFuncionarioPesquisar jDlgFuncionarioPesquisar = new JDlgFuncionarioPesquisar(null, true);
+        jDlgFuncionarioPesquisar.setTelaAnterior(this);
+        jDlgFuncionarioPesquisar.setVisible(true);
+
+        Util.habilitar(true, jBtnCancelar, jBtnExcluir, jBtnAlterar);
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments

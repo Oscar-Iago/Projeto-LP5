@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_oscar_iago?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">oscar_iago</property>
+    <property name="hibernate.connection.password">oscar_iago</property>
+    <mapping class="bean.OibProduto"/>
+    <mapping class="bean.OibCliente"/>
+    <mapping class="bean.OibVenda"/>
+    <mapping class="bean.OibUsuario"/>
+    <mapping class="bean.OibFuncionario"/>
+    <mapping class="bean.OibVendaproduto"/>
+  </session-factory>
+</hibernate-configuration>

@@ -5,11 +5,19 @@
  */
 package view;
 
+import bean.OibFuncionario;
+import controle.FuncionarioControle;
+import dao.FuncionarioDAO;
+import java.util.List;
+
 /**
  *
  * @author Oscar Iago
  */
 public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
+
+    private JDlgFuncionario jDlgFuncionario;
+    private FuncionarioControle funcionarioControle;
 
     /**
      * Creates new form JDlgFuncionarioPesquisar
@@ -17,6 +25,19 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
     public JDlgFuncionarioPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Consulta");
+        funcionarioControle = new FuncionarioControle();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        List lista = funcionarioDAO.listAll();
+        funcionarioControle.setList(lista);
+        jTable1.setModel(funcionarioControle);
+    }
+
+    public void setTelaAnterior(JDlgFuncionario jDlgFuncionario) {
+
+        this.jDlgFuncionario = jDlgFuncionario;
+
     }
 
     /**
@@ -49,8 +70,18 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("OK");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
 
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +110,19 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        int rowSel = jTable1.getSelectedRow();
+        OibFuncionario oibFuncionario = funcionarioControle.getBean(rowSel);
+        jDlgFuncionario.beanView(oibFuncionario);
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

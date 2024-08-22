@@ -5,6 +5,7 @@
  */
 package controle;
 
+import bean.OibUsuario;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,6 +16,14 @@ import javax.swing.table.AbstractTableModel;
 public class UsuariosControle extends AbstractTableModel {
 
     private List lista;
+
+    public void setList(List lista) {
+        this.lista = lista;
+    }
+
+    public OibUsuario getBean(int row) {
+        return (OibUsuario) lista.get(row);
+    }
 
     @Override
     public int getRowCount() {
@@ -28,7 +37,21 @@ public class UsuariosControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return 0;
+        OibUsuario oibUsuario = (OibUsuario) lista.get(rowIndex);
+        if( columnIndex == 0){
+            return oibUsuario.getIdOibUsuario();
+        }
+        if( columnIndex == 1){
+            return oibUsuario.getOibNome();
+        }
+        if( columnIndex == 2){
+            return oibUsuario.getOibApelido();
+        }
+        if( columnIndex == 3){
+            return oibUsuario.getOibCpf();
+        }
+        
+        return "";
     }
 
     public String getColumnName(int column) {
@@ -45,10 +68,7 @@ public class UsuariosControle extends AbstractTableModel {
             return "Senha";
         }
 
-
         return "";
     }
 
 }
-
-

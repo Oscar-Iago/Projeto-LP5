@@ -5,6 +5,7 @@
  */
 package controle;
 
+import bean.OibVendaproduto;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,6 +17,21 @@ public class VendaProdutoControle extends AbstractTableModel {
 
     private List lista;
 
+    public void setList(List lista) {
+        this.lista = lista;
+    }
+
+    public OibVendaproduto getBean(int row) {
+        return (OibVendaproduto) lista.get(row);
+    }
+
+    public void addList(VendaProduto vendaProduto) {
+        lista.add(vendaProduto);
+    }
+    public void removeList(VendaProduto vendaProduto) {
+        lista.add(vendaProduto);
+    }
+
     @Override
     public int getRowCount() {
         return lista.size();
@@ -23,12 +39,27 @@ public class VendaProdutoControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 0;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return 0;
+        VendaProduto vendaProduto = (VendaProduto) lista.get(rowIndex);
+        if (columnIndex == 0) {
+            return vendaProduto.getProduto().getidOibVenda();
+        }
+        if (columnIndex == 1) {
+            return vendaProduto.getProduto().getidOibVenda();
+        }
+        if (columnIndex == 2) {
+            return vendaProduto.getProduto().getidOibVenda();
+        }
+        if (columnIndex == 3) {
+            return vendaProduto.getProduto().getidOibVenda();
+        }
+        if (columnIndex == 4) {
+            return vendaProduto.getProduto().getidOibVenda();
+        }
     }
 
     public String getColumnName(int column) {
@@ -52,5 +83,3 @@ public class VendaProdutoControle extends AbstractTableModel {
     }
 
 }
-
-

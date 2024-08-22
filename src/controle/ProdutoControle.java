@@ -5,6 +5,7 @@
  */
 package controle;
 
+import bean.OibProduto;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,6 +16,14 @@ import javax.swing.table.AbstractTableModel;
 public class ProdutoControle extends AbstractTableModel {
 
     private List lista;
+
+    public void setList(List lista) {
+        this.lista = lista;
+    }
+
+    public OibProduto getBean(int row) {
+        return (OibProduto) lista.get(row);
+    }
 
     @Override
     public int getRowCount() {
@@ -28,7 +37,27 @@ public class ProdutoControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return 0;
+        OibProduto oibProduto = (OibProduto) lista.get(rowIndex);
+        if (columnIndex == 0) {
+            return oibProduto.getIdOibProduto();
+        }
+        if (columnIndex == 1) {
+            return oibProduto.getOibNome();
+        }
+        if (columnIndex == 2) {
+            return oibProduto.getOibEspecie();
+        }
+        if (columnIndex == 3) {
+            return oibProduto.getOibQuantidade();
+        }
+        if (columnIndex == 4) {
+            return oibProduto.getOibPreco();
+        }
+        if (columnIndex == 5) {
+            return oibProduto.getOibCor();
+        }
+
+        return "";
     }
 
     public String getColumnName(int column) {
@@ -48,7 +77,7 @@ public class ProdutoControle extends AbstractTableModel {
             return "Preco";
         }
         if (column == 5) {
-            return "Tamanho";
+            return "Cor";
         }
 
         return "";

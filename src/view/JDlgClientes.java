@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.OibCliente;
+import dao.ClienteDAO;
 import tools.Util;
 
 /**
@@ -11,6 +13,10 @@ import tools.Util;
  * @author u08655026174
  */
 public class JDlgClientes extends javax.swing.JDialog {
+
+    OibCliente oibCliente;
+    ClienteDAO clienteDAO;
+    boolean incluindo;
 
     /**
      * Creates new form JDlgClientes
@@ -21,9 +27,50 @@ public class JDlgClientes extends javax.swing.JDialog {
         setTitle("Cliente");
         setLocationRelativeTo(null);
 
-        Util.habilitar(false, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtStatus,
-                jTxtNaturalidade, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboSexo);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero, jBtnConfirmar, jBtnCancelar);
+    }
+
+    public OibCliente viewBean() {
+        OibCliente oibCliente = new OibCliente(); // criou o bean
+        oibCliente.setIdOibCliente(Util.strInt(jTxtCodigo.getText()));
+        oibCliente.setOibNome(jTxtNome.getText());
+        oibCliente.setOibSobrenome(jTxtSobrenome.getText());
+        oibCliente.setOibCpf(jFmtCpf.getText());
+        oibCliente.setOibDatanascimento(Util.strDate(jFmtNascimento.getText()));
+        oibCliente.setOibSenha(jPwfSenha.getText());
+        oibCliente.setOibEmail(jTxtEmail.getText());
+        oibCliente.setOibTelefone(jFmtTelefone.getText());
+        oibCliente.setOibEstadocivil(jTxtEstadocivil.getText());
+        oibCliente.setOibCep(jTxtCep.getText());
+        oibCliente.setOibRg(jTxtRg.getText());
+        oibCliente.setOibEndereco(jTxtEndereco.getText());
+//        oibCliente.setOibEstado(jCboEstado.getSelectedIndex());
+//        oibCliente.setOibTipo(jCboTipo.getSelectedIndex());
+//        oibCliente.setOibGenero(jCboGenero.getSelectedIndex());
+
+        return oibCliente;
+    }
+
+    public void beanView(OibCliente oibCliente) {
+        jTxtCodigo.setText(Util.intStr(oibCliente.getIdOibCliente()));
+        jTxtNome.setText(String.valueOf(oibCliente.getOibNome()));
+        jTxtSobrenome.setText(oibCliente.getOibSobrenome());
+        jTxtEmail.setText(oibCliente.getOibEmail());
+        jFmtTelefone.setText(oibCliente.getOibTelefone());
+        jFmtCpf.setText(oibCliente.getOibCpf());
+        jTxtCep.setText(oibCliente.getOibCep());
+        jTxtEndereco.setText(oibCliente.getOibEndereco());
+        jTxtEstadocivil.setText(oibCliente.getOibEstadocivil());
+        jFmtNascimento.setText(Util.dateStr(oibCliente.getOibDatanascimento()));
+        jTxtRg.setText(oibCliente.getOibRg());
+        jPwfSenha.setText(oibCliente.getOibSenha());
+        jCboEstado.setSelectedItem(oibCliente.getOibEstado());
+        jCboGenero.setSelectedItem(oibCliente.getOibGenero());
+//        jCboEstado.setSelectedItem(oibCliente.getTipoEstado());
+//        jCboTipo.setSelectedItem(oibCliente.getTipoCliente());
+//        jCboGenero.setSelectedItem(oibCliente.getTipoGenero());
+
     }
 
     /**
@@ -46,12 +93,10 @@ public class JDlgClientes extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jFmtTelefone = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jFmtCpf = new javax.swing.JFormattedTextField();
-        jTxtStatus = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTxtNaturalidade = new javax.swing.JTextField();
+        jTxtEstadocivil = new javax.swing.JTextField();
         jTxtEndereco = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -59,9 +104,9 @@ public class JDlgClientes extends javax.swing.JDialog {
         jTxtRg = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPwfSenha = new javax.swing.JPasswordField();
-        jCboEstado = new javax.swing.JComboBox<>();
-        jCboTipo = new javax.swing.JComboBox<>();
-        jCboSexo = new javax.swing.JComboBox<>();
+        jCboEstado = new javax.swing.JComboBox<String>();
+        jCboTipo = new javax.swing.JComboBox<String>();
+        jCboGenero = new javax.swing.JComboBox<String>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -72,6 +117,8 @@ public class JDlgClientes extends javax.swing.JDialog {
         jBtnConfirmar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTxtCep = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,15 +134,13 @@ public class JDlgClientes extends javax.swing.JDialog {
 
         jLabel6.setText("CPF");
 
-        jLabel7.setText("Status");
-
-        jLabel8.setText("Naturalidade");
+        jLabel8.setText("Estado Civil");
 
         jLabel9.setText("Endereco");
 
         jLabel10.setText("RG");
 
-        jLabel11.setText("Nascimento");
+        jLabel11.setText("Data de Nascimento");
 
         jLabel12.setText("Senha");
 
@@ -105,17 +150,17 @@ public class JDlgClientes extends javax.swing.JDialog {
             }
         });
 
-        jCboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jCboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel13.setText("Estado");
 
         jLabel14.setText("Tipo");
 
-        jLabel15.setText("Sexo");
+        jLabel15.setText("Genero");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -130,23 +175,50 @@ public class JDlgClientes extends javax.swing.JDialog {
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alterar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
+        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAlterarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnAlterar);
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnExcluir);
 
         jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gravar.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
+        jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConfirmarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnConfirmar);
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnCancelar);
 
         jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnPesquisar);
+
+        jLabel7.setText("CEP");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,21 +233,19 @@ public class JDlgClientes extends javax.swing.JDialog {
                             .addComponent(jLabel12)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel13))
-                                        .addGap(88, 88, 88)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
+                                    .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13))
+                                .addGap(88, 88, 88)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(108, 108, 108)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel15)))
-                            .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -185,24 +255,23 @@ public class JDlgClientes extends javax.swing.JDialog {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6))
                                 .addComponent(jLabel8)
-                                .addComponent(jTxtNaturalidade)
+                                .addComponent(jTxtEstadocivil)
                                 .addComponent(jTxtRg))
                             .addComponent(jLabel10)
                             .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel5)
-                                .addComponent(jFmtTelefone)
-                                .addComponent(jTxtStatus)
-                                .addComponent(jLabel11)
-                                .addComponent(jTxtEndereco)
-                                .addComponent(jFmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTxtSobrenome, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel5)
+                            .addComponent(jFmtTelefone)
+                            .addComponent(jLabel11)
+                            .addComponent(jTxtEndereco)
+                            .addComponent(jFmtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jTxtCep))
                         .addGap(99, 99, 99))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -214,9 +283,6 @@ public class JDlgClientes extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel2)
@@ -231,47 +297,52 @@ public class JDlgClientes extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFmtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jFmtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTxtEstadocivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jFmtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -283,7 +354,64 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        incluindo = true;
+        Util.habilitar(true, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero,
+                jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limparCampos(jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
+
+    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        // TODO add your handling code here:
+        incluindo = false;
+        Util.habilitar(true, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero,
+                jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        // TODO add your handling code here:
+        Util.limparCampos(jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero);
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+        // TODO add your handling code here:
+        OibCliente oibCliente = viewBean();
+        clienteDAO = new ClienteDAO();
+        if (incluindo == true) {
+            clienteDAO.insert(oibCliente);
+        } else {
+            clienteDAO.update(oibCliente);
+        }
+        Util.habilitar(false, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero,
+                jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limparCampos(jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero);
+    }//GEN-LAST:event_jBtnConfirmarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        Util.habilitar(false, jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero,
+                jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limparCampos(jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
+                jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        JDlgClientesPesquisar jDlgClientesPesquisar = new JDlgClientesPesquisar(null, true);
+        jDlgClientesPesquisar.setTelaAnterior(this);
+        jDlgClientesPesquisar.setVisible(true);
+
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,7 +463,7 @@ public class JDlgClientes extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<String> jCboEstado;
-    private javax.swing.JComboBox<String> jCboSexo;
+    private javax.swing.JComboBox<String> jCboGenero;
     private javax.swing.JComboBox<String> jCboTipo;
     private javax.swing.JFormattedTextField jFmtCpf;
     private javax.swing.JFormattedTextField jFmtNascimento;
@@ -357,13 +485,13 @@ public class JDlgClientes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPwfSenha;
+    private javax.swing.JTextField jTxtCep;
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtEmail;
     private javax.swing.JTextField jTxtEndereco;
-    private javax.swing.JTextField jTxtNaturalidade;
+    private javax.swing.JTextField jTxtEstadocivil;
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JTextField jTxtRg;
     private javax.swing.JTextField jTxtSobrenome;
-    private javax.swing.JTextField jTxtStatus;
     // End of variables declaration//GEN-END:variables
 }

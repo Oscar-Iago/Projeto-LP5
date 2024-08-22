@@ -5,11 +5,19 @@
  */
 package view;
 
+import bean.OibProduto;
+import controle.ProdutoControle;
+import dao.ProdutoDAO;
+import java.util.List;
+
 /**
  *
  * @author Oscar Iago
  */
 public class JDlgProdutoPesquisar extends javax.swing.JDialog {
+
+    private JDlgProduto jDlgProduto;
+    private ProdutoControle produtoControle;
 
     /**
      * Creates new form JDlgProdutoPesquisar
@@ -17,6 +25,19 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
     public JDlgProdutoPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Consulta");
+        produtoControle = new ProdutoControle();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List lista = produtoDAO.listAll();
+        produtoControle.setList(lista);
+        jTable1.setModel(produtoControle);
+    }
+
+    public void setTelaAnterior(JDlgProduto jDlgProduto) {
+
+        this.jDlgProduto = jDlgProduto;
+
     }
 
     /**
@@ -49,8 +70,18 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("OK");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
 
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,14 +102,27 @@ public class JDlgProdutoPesquisar extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBtnOk)
-                    .addComponent(jBtnCancelar))
+                    .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        int rowSel = jTable1.getSelectedRow();
+        OibProduto oibProduto = produtoControle.getBean(rowSel);
+        jDlgProduto.beanView(oibProduto);
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

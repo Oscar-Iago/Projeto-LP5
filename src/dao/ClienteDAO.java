@@ -5,7 +5,10 @@
  */
 package dao;
 
+import bean.OibCliente;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -41,8 +44,8 @@ public class ClienteDAO extends DAO_Abstract {
     @Override
     public Object list(int id) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria("".class);
-        criteria.add(Restrictions.eq("idclienteRsj", id));
+        Criteria criteria = session.createCriteria(OibCliente.class);
+        criteria.add(Restrictions.eq("id_oib_cliente", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista.get(0);
@@ -51,7 +54,7 @@ public class ClienteDAO extends DAO_Abstract {
     @Override
     public List listAll() {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria("".class);
+        Criteria criteria = session.createCriteria(OibCliente.class);
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

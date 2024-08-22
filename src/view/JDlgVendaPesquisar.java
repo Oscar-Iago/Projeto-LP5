@@ -5,7 +5,10 @@
  */
 package view;
 
+import bean.OibVenda;
 import controle.VendaControle;
+import dao.VendaDAO;
+import java.util.List;
 
 /**
  *
@@ -13,7 +16,8 @@ import controle.VendaControle;
  */
 public class JDlgVendaPesquisar extends javax.swing.JDialog {
 
-    private JDlgVenda jDlgvenda;
+    private JDlgVenda jDlgVenda;
+    private VendaControle vendaControle;
 
     /**
      * Creates new form JDlgVendaPesquisar
@@ -23,14 +27,17 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta de Venda");
-        
-        VendaControle vendaControle = new VendaControle();
+        vendaControle = new VendaControle();
+        VendaDAO vendaDAO = new VendaDAO();
+        List lista = vendaDAO.listAll();
+        vendaControle.setList(lista);
         jTable1.setModel(vendaControle);
     }
-    
-        public void setTelaAnterior(JDlgVenda jDlgvenda) {
-        this.jDlgvenda = jDlgvenda;
-    
+
+    public void setTelaAnterior(JDlgVenda jDlgVenda) {
+
+        this.jDlgVenda = jDlgVenda;
+
     }
 
     /**
@@ -63,8 +70,18 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setText("OK");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
 
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +110,19 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        int rowSel = jTable1.getSelectedRow();
+        OibVenda oibVenda = vendaControle.getBean(rowSel);
+        jDlgVenda.beanView(oibVenda);
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
