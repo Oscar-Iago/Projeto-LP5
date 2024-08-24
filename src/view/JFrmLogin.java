@@ -5,12 +5,16 @@
  */
 package view;
 
+import bean.OibUsuario;
+import dao.UsuarioDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Oscar Iago
  */
 public class JFrmLogin extends javax.swing.JFrame {
-
     /**
      * Creates new form JFrmLogin
      */
@@ -18,6 +22,19 @@ public class JFrmLogin extends javax.swing.JFrame {
         initComponents();
         setTitle("Login");
         setLocationRelativeTo(null);
+
+    }
+
+    public OibUsuario viewBean() {
+
+        String nome = jTxtUsuario.getText();
+        String senha = jTxtSenha.getText();
+
+        OibUsuario oibUsuario = new OibUsuario();
+        oibUsuario.setOibApelido(nome);
+        oibUsuario.setOibSenha(senha);
+
+        return oibUsuario;
     }
 
     /**
@@ -62,19 +79,16 @@ public class JFrmLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnAcessar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTxtSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtUsuario, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(jTxtSenha))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,18 +112,35 @@ public class JFrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAcessarActionPerformed
-        // TODO add your handling code here:
-        JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-        jFrmPrincipal.setVisible(true);
 
-        JFrmLogin jFrmLogin = new JFrmLogin();
-        jFrmLogin.setVisible(false);
+        OibUsuario oibUsuario = viewBean();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+        List<OibUsuario> usuarios = usuarioDAO.listAll();
+        boolean loginValido = false;
+
+        for (OibUsuario usuario : usuarios) {
+            if (usuario.getOibApelido().equals(oibUsuario.getOibApelido())
+                    && usuario.getOibSenha().equals(oibUsuario.getOibSenha())) {
+                loginValido = true;
+                break;
+            }
+        }
+        if (loginValido == true) {
+            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+            jFrmPrincipal.setEnabled(true); // Habilita a tela principal
+            jFrmPrincipal.setVisible(true);
+            this.dispose(); // Fecha a tela de login
+            JOptionPane.showMessageDialog(this, "Login efetuado com sucesso.", "Login Correto", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jBtnAcessarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        JFrmLogin jFrmLogin = new JFrmLogin();
-        jFrmLogin.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**

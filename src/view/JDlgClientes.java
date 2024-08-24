@@ -374,6 +374,9 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            clienteDAO.delete(viewBean());
+        }
         Util.limparCampos(jTxtNome, jTxtSobrenome, jTxtCodigo, jTxtEmail, jFmtTelefone, jFmtCpf, jTxtEstadocivil, jTxtCep,
                 jTxtEstadocivil, jTxtEndereco, jTxtRg, jFmtNascimento, jPwfSenha, jCboEstado, jCboTipo, jCboGenero);
     }//GEN-LAST:event_jBtnExcluirActionPerformed

@@ -103,7 +103,7 @@ public class OibCliente implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "oib_datanascimento", nullable = false, length = 10)
+    @Column(name = "oib_datanascimento", nullable = true, length = 10)
     public Date getOibDatanascimento() {
         return this.oibDatanascimento;
     }
@@ -112,7 +112,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibDatanascimento = oibDatanascimento;
     }
 
-    @Column(name = "oib_genero", nullable = false, length = 10)
+    @Column(name = "oib_genero", nullable = true, length = 10)
     public String getOibGenero() {
         return this.oibGenero;
     }
@@ -121,7 +121,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibGenero = oibGenero;
     }
 
-    @Column(name = "oib_email", nullable = false, length = 40)
+    @Column(name = "oib_email", nullable = true, length = 40)
     public String getOibEmail() {
         return this.oibEmail;
     }
@@ -130,7 +130,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibEmail = oibEmail;
     }
 
-    @Column(name = "oib_telefone", nullable = false, length = 15)
+    @Column(name = "oib_telefone", nullable = true, length = 15)
     public String getOibTelefone() {
         return this.oibTelefone;
     }
@@ -139,7 +139,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibTelefone = oibTelefone;
     }
 
-    @Column(name = "oib_estado", nullable = false, length = 2)
+    @Column(name = "oib_estado", nullable = true, length = 2)
     public String getOibEstado() {
         return this.oibEstado;
     }
@@ -148,7 +148,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibEstado = oibEstado;
     }
 
-    @Column(name = "oib_senha", nullable = false, length = 30)
+    @Column(name = "oib_senha", nullable = true, length = 30)
     public String getOibSenha() {
         return this.oibSenha;
     }
@@ -157,7 +157,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibSenha = oibSenha;
     }
 
-    @Column(name = "oib_rg", nullable = false, length = 10)
+    @Column(name = "oib_rg", nullable = true, length = 10)
     public String getOibRg() {
         return this.oibRg;
     }
@@ -166,7 +166,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibRg = oibRg;
     }
 
-    @Column(name = "oib_endereco", nullable = false, length = 40)
+    @Column(name = "oib_endereco", nullable = true, length = 40)
     public String getOibEndereco() {
         return this.oibEndereco;
     }
@@ -175,7 +175,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibEndereco = oibEndereco;
     }
 
-    @Column(name = "oib_tipo", nullable = false, length = 15)
+    @Column(name = "oib_tipo", nullable = true, length = 15)
     public String getOibTipo() {
         return this.oibTipo;
     }
@@ -184,7 +184,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibTipo = oibTipo;
     }
 
-    @Column(name = "oib_estadocivil", nullable = false, length = 20)
+    @Column(name = "oib_estadocivil", nullable = true, length = 20)
     public String getOibEstadocivil() {
         return this.oibEstadocivil;
     }
@@ -193,7 +193,7 @@ public class OibCliente implements java.io.Serializable {
         this.oibEstadocivil = oibEstadocivil;
     }
 
-    @Column(name = "oib_cep", nullable = false, length = 10)
+    @Column(name = "oib_cep", nullable = true, length = 10)
     public String getOibCep() {
         return this.oibCep;
     }

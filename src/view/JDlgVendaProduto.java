@@ -25,8 +25,8 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Venda Produtos");
-        jTxtTotal.setEnabled(modal);
-        jTxtValorUnitario.setEnabled(modal);
+        jTxtTotal.setEnabled(false);
+        jTxtValorUnitario.setEnabled(false);
         ProdutoDAO produtoDAO = new ProdutoDAO();
         List lista = produtoDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
@@ -93,6 +93,11 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
         jPanel1.add(jBtnOk);
 
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBtnCancelar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,6 +176,11 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

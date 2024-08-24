@@ -17,7 +17,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         initComponents();
         setTitle("Menu Principal");
         setLocationRelativeTo(null);
-        setExtendedState(JFrmPrincipal.MAXIMIZED_BOTH); 
+        setExtendedState(JFrmPrincipal.MAXIMIZED_BOTH);
     }
 
     /**
@@ -36,7 +36,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
@@ -89,15 +88,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Movimentos");
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText("Compra");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem5);
-
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText("Venda");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -146,10 +136,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jDlgClientes.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         JDlgVenda jDlgVenda = new JDlgVenda(null, true);
@@ -192,6 +178,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                JFrmLogin login = new JFrmLogin();
+                login.setVisible(true);
+                login.setAlwaysOnTop(true);
 
                 new JFrmPrincipal().setVisible(true);
             }
@@ -207,7 +197,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
