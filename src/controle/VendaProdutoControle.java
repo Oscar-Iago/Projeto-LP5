@@ -27,8 +27,8 @@ public class VendaProdutoControle extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    public void removeList(int index) {
-        lista.remove(index);
+    public void removeList(int row) {
+        lista.remove(row);
         this.fireTableDataChanged();
     }
 
@@ -60,24 +60,24 @@ public class VendaProdutoControle extends AbstractTableModel {
         if (columnIndex == 4) {
             return oibVendaProduto.getOibQuantidade() * oibVendaProduto.getOibValorunitario();
         }
-        return"";
+        return "";
     }
 
     public String getColumnName(int column) {
         if (column == 0) {
-            return "";
+            return "Codigo";
         }
         if (column == 1) {
-            return "";
+            return "Nome";
         }
         if (column == 2) {
-            return "";
+            return "Quantidade";
         }
         if (column == 3) {
-            return "";
+            return "Valor Unitario";
         }
         if (column == 4) {
-            return "";
+            return "Total";
         }
 
         return "";

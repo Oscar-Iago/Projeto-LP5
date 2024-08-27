@@ -289,7 +289,7 @@
     <Component class="javax.swing.JButton" name="jBtnAlterarProd">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/img/pesquisar.png"/>
+          <Image iconType="3" name="/img/alterar.png"/>
         </Property>
       </Properties>
       <Events>
