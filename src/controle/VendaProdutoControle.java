@@ -31,6 +31,10 @@ public class VendaProdutoControle extends AbstractTableModel {
         lista.remove(row);
         this.fireTableDataChanged();
     }
+    
+    public OibVendaproduto getList(int index) {
+        return (OibVendaproduto) lista.get(index);
+    }
 
     @Override
     public int getRowCount() {

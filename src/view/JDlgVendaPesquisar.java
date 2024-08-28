@@ -27,10 +27,9 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta de Venda");
-        vendaControle = new VendaControle();
         VendaDAO vendaDAO = new VendaDAO();
-        List lista = vendaDAO.listAll();
-        vendaControle.setList(lista);
+        vendaControle = new VendaControle();
+        vendaControle.setList(vendaDAO.listAll());
         jTable1.setModel(vendaControle);
     }
 
@@ -113,11 +112,17 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        int rowSel = jTable1.getSelectedRow();
-        OibVenda oibVenda = vendaControle.getBean(rowSel);
-        jDlgVenda.beanView(oibVenda);
-        
+//        if (jTable1.getSelectedRow() == -1) {
+//            setVisible(false);
+//  } else {
+//            int rowSel = jTable1.getSelectedRow();
+//            OibVenda oibVenda vendaControle.getOibVenda(rowSel)
+//            VendaProdutoDAO vendaProdutoDAO = new VendaPRodutoDAO;
+//            vendaProdutoDAO.list(OibVenda.getOibIdVenda);
+//            jDlgVenda.beanView(OibVenda, );
+//             setVisible(false);
+//   }
+//        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

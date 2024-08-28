@@ -7,6 +7,7 @@ package tools;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -49,8 +50,6 @@ public class Util {
                 "Perguntar", JOptionPane.YES_NO_OPTION);
         return false;
     }
-    
-    
 
     public static int strInt(String cad) {
         return Integer.parseInt(cad);
@@ -68,10 +67,12 @@ public class Util {
         return String.valueOf(num);
     }
 
-    public static java.util.Date strDate(String car) {
+    public static Date strDate(String valor) {
+        Date data = null;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            return formato.parse(car);
+            //data.
+            return formato.parse(valor);
         } catch (ParseException ex) {
             System.out.println("Houve uma falha em sua conversão de data");
         }

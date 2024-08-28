@@ -12,7 +12,9 @@ import bean.OibVenda;
 import bean.OibVendaproduto;
 import controle.VendaProdutoControle;
 import dao.VendaDAO;
+import dao.VendaProdutoDAO;
 import java.util.ArrayList;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -52,12 +54,13 @@ public class JDlgVenda extends javax.swing.JDialog {
         vendaProdutoControle.addList(oibVendaProduto);
     }
 
-    public void beanView(OibVenda oibVenda) {
+    public void beanView(OibVenda oibVenda, List lista) {
         jTxtCodigo.setText(Util.intStr(oibVenda.getIdOibVenda()));
         jFmtData.setText(Util.dateStr(oibVenda.getOibData()));
         jTxtTotal.setText(oibVenda.getOibTotal());
-        //jCboCliente.setSelectedIndex(oibVenda.getOibCliente());
-        //jCboFuncionario.setSelectedIndex(oibVenda.getOibFuncionario());
+        jCboCliente.setSelectedItem(oibVenda.getOibCliente());
+        jCboFuncionario.setSelectedItem(oibVenda.getOibFuncionario());
+        vendaProdutoControle.setList(lista);
 
     }
 
@@ -66,8 +69,8 @@ public class JDlgVenda extends javax.swing.JDialog {
         oibVenda.setIdOibVenda(Util.strInt(jTxtCodigo.getText()));
         oibVenda.setOibData(Util.strDate(jFmtData.getText()));
         oibVenda.setOibTotal(jTxtTotal.getText());
-        //oibVenda.setOibCliente(jCboCliente.getSelectedIndex());        
-        //oibVenda.setOibFuncionario(jCboFuncionario.getSelectedIndex());        
+        oibVenda.setOibCliente((OibCliente) jCboCliente.getSelectedItem());
+        oibVenda.setOibFuncionario((OibFuncionario) jCboFuncionario.getSelectedItem());
         return oibVenda;
     }
 
@@ -308,22 +311,25 @@ public class JDlgVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
         //Util.limparCampos(jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario);
         if (Util.perguntar("Deseja Excluir?") == true) {
-            vendaDAO.delete(viewBean());
+            VendaProdutoDAO vendaProdutoDAO = new VendaProdutoDAO();
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                vendaProdutoDAO.insert(vendaProdutoControle.getList(i));
+            }
+            VendaDAO vendaDAO = new VendaDAO();
+            vendaDAO.insert(viewBean());
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        // TODO add your handling code here:
-        OibVenda oibVenda = viewBean();
-        vendaDAO = new VendaDAO();
-        if (incluindo == true) {
-            vendaDAO.insert(oibVenda);
-        } else {
-            vendaDAO.update(oibVenda);
+        // TODO add your handling code here:    
+        VendaDAO vendaDAO = new VendaDAO();
+        vendaDAO.insert(viewBean());
+        VendaProdutoDAO vendaProdutoDAO = new VendaProdutoDAO();
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            OibVendaproduto oibVendaProduto = vendaProdutoControle.getList(i);
+            oibVendaProduto.setOibVenda(viewBean());
+            vendaProdutoDAO.insert(oibVendaProduto);
         }
-        Util.limparCampos(jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario);
-        Util.habilitar(false, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnCancelar, jBtnConfirmar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -338,7 +344,6 @@ public class JDlgVenda extends javax.swing.JDialog {
         JDlgVendaPesquisar jDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
         jDlgVendaPesquisar.setTelaAnterior(this);
         jDlgVendaPesquisar.setVisible(true);
-
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
@@ -429,5 +434,9 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtTotal;
     // End of variables declaration//GEN-END:variables
+
+
+
+
 
 }

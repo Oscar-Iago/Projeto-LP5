@@ -47,7 +47,7 @@ public class VendaProdutoDAO extends DAO_Abstract {
         criteria.add(Restrictions.eq("id_oib_vendaproduto", id));
         List lista = criteria.list();
         session.getTransaction().commit();
-        return lista.get(0);
+        return lista;
     }
 
     @Override
