@@ -4,6 +4,11 @@
  */
 package view;
 
+import consulta.JDlgConsultaCliente;
+import consulta.JDlgConsultaFuncionario;
+import consulta.JDlgConsultaProduto;
+import consulta.JDlgConsultaUsuario;
+
 /**
  *
  * @author u08655026174
@@ -38,6 +43,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +109,39 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Consultas");
+
+        jMenuItem5.setText("Cliente");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuItem7.setText("Funcionario");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem7);
+
+        jMenuItem8.setText("Produto");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem9.setText("Usuario");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem9);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -120,7 +162,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        JDlgUsuarios jDlgUsuarios = new JDlgUsuarios(null, true);
+        JDlgUsuario jDlgUsuarios = new JDlgUsuario(null, true);
         jDlgUsuarios.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -132,7 +174,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        JDlgClientes jDlgClientes = new JDlgClientes(null, true);
+        JDlgCliente jDlgClientes = new JDlgCliente(null, true);
         jDlgClientes.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -147,6 +189,30 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         JDlgProduto jDlgProduto = new JDlgProduto(null, true);
         jDlgProduto.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaCliente jDlgConsultaCliente = new JDlgConsultaCliente(null, true);
+        jDlgConsultaCliente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaFuncionario jDlgConsultaFuncionario = new JDlgConsultaFuncionario(null, true);
+        jDlgConsultaFuncionario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaProduto jDlgConsultaProduto = new JDlgConsultaProduto(null, true);
+        jDlgConsultaProduto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaUsuario jDlgConsultaUsuario = new JDlgConsultaUsuario(null, true);
+        jDlgConsultaUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,12 +244,12 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 JFrmLogin login = new JFrmLogin();
                 login.setVisible(true);
                 login.setAlwaysOnTop(true);
 
-                new JFrmPrincipal().setVisible(true);
+                //new JFrmPrincipal().setVisible(true);
             }
         });
     }
@@ -197,6 +263,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

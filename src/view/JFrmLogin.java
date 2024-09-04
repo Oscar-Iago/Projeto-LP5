@@ -128,10 +128,9 @@ public class JFrmLogin extends javax.swing.JFrame {
         }
         if (loginValido == true) {
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-            jFrmPrincipal.setEnabled(true); // Habilita a tela principal
             jFrmPrincipal.setVisible(true);
             this.dispose(); // Fecha a tela de login
-            JOptionPane.showMessageDialog(this, "Login efetuado com sucesso.", "Login Correto", JOptionPane.INFORMATION_MESSAGE);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
         }
