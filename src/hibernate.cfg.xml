@@ -4,9 +4,8 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_oscar_iago?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">oscar_iago</property>
-    <property name="hibernate.connection.password">oscar_iago</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_oscar_iago?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
     <mapping class="bean.OibProduto"/>
     <mapping class="bean.OibCliente"/>
     <mapping class="bean.OibVenda"/>

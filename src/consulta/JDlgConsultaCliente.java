@@ -5,11 +5,17 @@
  */
 package consulta;
 
+import dao.ClienteDAO;
+import java.util.List;
+
 /**
  *
  * @author u08655026174
  */
 public class JDlgConsultaCliente extends javax.swing.JDialog {
+
+    private ConsultaCliente consultaCliente;
+    private ClienteDAO clienteDAO;
 
     /**
      * Creates new form JDlgConsultaCliente
@@ -19,6 +25,12 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta de Clientes");
+
+        consultaCliente = new ConsultaCliente();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List lista = clienteDAO.listAll();
+        consultaCliente.setList(lista);
+        jTable1.setModel(consultaCliente);
     }
 
     /**
@@ -50,6 +62,11 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         jLabel2.setText("CPF");
 
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,6 +117,11 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBtnOk);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,6 +144,24 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        if (jTxtNome.getText().equals("") && jTxtCpf.getText().equals("")) {
+            List lista = clienteDAO.listAll();
+            consultaCliente.setList(lista);
+
+        } else {
+            List lista = clienteDAO.getNome(jTxtNome.getText());
+            lista = clienteDAO.getCpf(jTxtCpf.getText());
+            consultaCliente.setList(lista);
+        }
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
      * @param args the command line arguments

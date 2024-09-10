@@ -60,4 +60,22 @@ public class UsuarioDAO extends DAO_Abstract {
         return lista;
     }
 
+    public List getNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(OibUsuario.class);
+        criteria.add(Restrictions.like("oibNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List getCpf(String cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(OibUsuario.class);
+        criteria.add(Restrictions.like("oibCpf", "%" + cpf + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
 }

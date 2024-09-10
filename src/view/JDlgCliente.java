@@ -104,9 +104,9 @@ public class JDlgCliente extends javax.swing.JDialog {
         jTxtRg = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPwfSenha = new javax.swing.JPasswordField();
-        jCboEstado = new javax.swing.JComboBox<String>();
-        jCboTipo = new javax.swing.JComboBox<String>();
-        jCboGenero = new javax.swing.JComboBox<String>();
+        jCboEstado = new javax.swing.JComboBox<>();
+        jCboTipo = new javax.swing.JComboBox<>();
+        jCboGenero = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -150,11 +150,11 @@ public class JDlgCliente extends javax.swing.JDialog {
             }
         });
 
-        jCboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MS", "MT", "PR", "PA", "RJ", "SP", "SC", "RS", "RN", "ES" }));
 
-        jCboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Novo", "Nivel 1 ", "Nivel 2", "Nivel Premium", " " }));
 
-        jCboGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M", "NB", " " }));
 
         jLabel13.setText("Estado");
 

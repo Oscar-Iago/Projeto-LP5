@@ -5,11 +5,17 @@
  */
 package consulta;
 
+import dao.FuncionarioDAO;
+import java.util.List;
+
 /**
  *
  * @author u08655026174
  */
 public class JDlgConsultaFuncionario extends javax.swing.JDialog {
+
+    private ConsultaFuncionario consultaFuncionario;
+    private FuncionarioDAO funcionarioDAO;
 
     /**
      * Creates new form JDlgConsultaFuncionario
@@ -19,6 +25,12 @@ public class JDlgConsultaFuncionario extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta de Funcionarios");
+
+        consultaFuncionario = new ConsultaFuncionario();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        List lista = funcionarioDAO.listAll();
+        consultaFuncionario.setList(lista);
+        jTable1.setModel(consultaFuncionario);
     }
 
     /**
@@ -65,6 +77,11 @@ public class JDlgConsultaFuncionario extends javax.swing.JDialog {
         jLabel2.setText("Função");
 
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,6 +119,11 @@ public class JDlgConsultaFuncionario extends javax.swing.JDialog {
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBtnOk);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,6 +159,24 @@ public class JDlgConsultaFuncionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        if (jTxtNome.getText().equals("") && jTxtFuncao.getText().equals("")) {
+            List lista = funcionarioDAO.listAll();
+            consultaFuncionario.setList(lista);
+
+        } else {
+            List lista = funcionarioDAO.getNome(jTxtNome.getText());
+            lista = funcionarioDAO.getFuncao(jTxtFuncao.getText());
+            consultaFuncionario.setList(lista);
+        }
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
      * @param args the command line arguments

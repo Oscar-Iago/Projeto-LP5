@@ -63,7 +63,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jTxtSenha" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jTxtCpf" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBtnPesquisar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -83,7 +83,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTxtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTxtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBtnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -99,17 +99,20 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Senha"/>
+            <Property name="text" type="java.lang.String" value="CPF"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTxtNome">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTxtSenha">
+        <Component class="javax.swing.JTextField" name="jTxtCpf">
         </Component>
         <Component class="javax.swing.JButton" name="jBtnPesquisar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPesquisarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

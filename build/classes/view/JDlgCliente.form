@@ -257,11 +257,17 @@
     <Component class="javax.swing.JComboBox" name="jCboEstado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="10">
+            <StringItem index="0" value="MS"/>
+            <StringItem index="1" value="MT"/>
+            <StringItem index="2" value="PR"/>
+            <StringItem index="3" value="PA"/>
+            <StringItem index="4" value="RJ"/>
+            <StringItem index="5" value="SP"/>
+            <StringItem index="6" value="SC"/>
+            <StringItem index="7" value="RS"/>
+            <StringItem index="8" value="RN"/>
+            <StringItem index="9" value="ES"/>
           </StringArray>
         </Property>
       </Properties>
@@ -272,11 +278,12 @@
     <Component class="javax.swing.JComboBox" name="jCboTipo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Novo"/>
+            <StringItem index="1" value="Nivel 1 "/>
+            <StringItem index="2" value="Nivel 2"/>
+            <StringItem index="3" value="Nivel Premium"/>
+            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -288,10 +295,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+            <StringItem index="0" value="F"/>
+            <StringItem index="1" value="M"/>
+            <StringItem index="2" value="NB"/>
+            <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
       </Properties>

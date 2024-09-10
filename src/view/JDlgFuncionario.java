@@ -228,10 +228,11 @@ public class JDlgFuncionario extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento,
                 jFmtTelefone, jTxtFuncao, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtSobrenome, jFmtCpf, jFmtNascimento, jFmtTelefone, jTxtFuncao);
+        
         incluindo = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 

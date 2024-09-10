@@ -5,11 +5,18 @@
  */
 package consulta;
 
+import dao.ProdutoDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u08655026174
  */
 public class JDlgConsultaProduto extends javax.swing.JDialog {
+
+    private ConsultaProduto consultaProduto;
+    private ProdutoDAO produtoDAO;
 
     /**
      * Creates new form JDlgConsultaProduto
@@ -19,6 +26,12 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Consulta de Produtos");
+
+        consultaProduto = new ConsultaProduto();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List lista = produtoDAO.listAll();
+        consultaProduto.setList(lista);
+        jTable1.setModel(consultaProduto);
     }
 
     /**
@@ -50,6 +63,11 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         jLabel2.setText("Preço");
 
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,6 +105,11 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
         jPanel2.add(jBtnOk);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,6 +145,24 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        if (jTxtNome.getText().equals("") && jTxtPreco.getText().equals("")) {
+            List lista = produtoDAO.listAll();
+            consultaProduto.setList(lista);
+
+        } else {
+            List lista = produtoDAO.getNome(jTxtNome.getText());
+            lista = produtoDAO.getPreco (Util.strDouble(jTxtPreco.getText()));
+            consultaProduto.setList(lista);
+        }
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
      * @param args the command line arguments

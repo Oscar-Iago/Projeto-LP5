@@ -60,4 +60,22 @@ public class FuncionarioDAO extends DAO_Abstract {
         return lista;
     }
 
+    public List getNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(OibFuncionario.class);
+        criteria.add(Restrictions.like("oibNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List getFuncao(String funcao) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(OibFuncionario.class);
+        criteria.add(Restrictions.like("oibFuncao", "%" + funcao + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
 }
