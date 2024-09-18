@@ -138,8 +138,8 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -148,15 +148,23 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        consultaProduto = new ConsultaProduto();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        
         if (jTxtNome.getText().equals("") && jTxtPreco.getText().equals("")) {
             List lista = produtoDAO.listAll();
             consultaProduto.setList(lista);
-
-        } else {
+        } else if (!jTxtNome.getText().equals("") && jTxtPreco.getText().equals("")) {
             List lista = produtoDAO.getNome(jTxtNome.getText());
-            lista = produtoDAO.getPreco (Util.strDouble(jTxtPreco.getText()));
+            consultaProduto.setList(lista);
+        } else if (!jTxtNome.getText().equals("") && !jTxtPreco.getText().equals("")) {
+            List lista = produtoDAO.getNomePreco(jTxtNome.getText(), Double.valueOf(jTxtPreco.getText()));
+            consultaProduto.setList(lista);
+        } else if (jTxtNome.getText().equals("") && !jTxtPreco.getText().equals("")) {
+            List lista = produtoDAO.getPreco(Double.valueOf(jTxtPreco.getText()));
             consultaProduto.setList(lista);
         }
+        jTable1.setModel(consultaProduto);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed

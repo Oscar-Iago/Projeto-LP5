@@ -59,8 +59,8 @@ public class ProdutoDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    
-        public List getNome(String nome) {
+
+    public List getNome(String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(OibProduto.class);
         criteria.add(Restrictions.like("oibNome", "%" + nome + "%"));
@@ -68,7 +68,7 @@ public class ProdutoDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    
+
     public List getPreco(Double preco) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(OibProduto.class);
@@ -76,6 +76,17 @@ public class ProdutoDAO extends DAO_Abstract {
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
+    }
+
+    public List getNomePreco(String nome, Double preco) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(OibProduto.class);
+        criteria.add(Restrictions.like("oibNome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("oibPreco", "%" + preco + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+
     }
 
 }

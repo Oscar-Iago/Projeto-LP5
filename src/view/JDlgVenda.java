@@ -11,10 +11,12 @@ import bean.OibProduto;
 import bean.OibVenda;
 import bean.OibVendaproduto;
 import controle.VendaProdutoControle;
+import dao.ClienteDAO;
 import dao.VendaDAO;
 import dao.VendaProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import tools.Util;
 
 /**
@@ -43,6 +45,15 @@ public class JDlgVenda extends javax.swing.JDialog {
 
         Util.habilitar(false, jTxtCodigo, jFmtData, jTxtTotal, jCboCliente, jCboFuncionario, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jBtnExcluir);
+
+        jCboCliente.removeAllItems();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List lista = clienteDAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+            jCboCliente.addItem((OibCliente) lista.get(i));
+            
+        }
+
     }
 
     public void addProduto(OibProduto oibProduto, int quantidade, double valorUnitario) {
@@ -186,6 +197,12 @@ public class JDlgVenda extends javax.swing.JDialog {
         jLabel4.setText("Funcionario");
 
         jLabel5.setText("Total");
+
+        jCboCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboClienteActionPerformed(evt);
+            }
+        });
 
         jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,17 +373,22 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?") == true) {
-            vendaProdutoControle.removeList(jTable1.getSelectedRow());
-        }
+
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here: 
-        JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
-        jDlgVendaProduto.setTelaAnterior(this);
-        jDlgVendaProduto.setVisible(true);
+        if (Util.perguntar("Deseja Alterar?") == true) {
+            JDlgVendaProduto jDlgVendaProduto = new JDlgVendaProduto(null, true);
+            jDlgVendaProduto.setTelaAnterior(this);
+            jDlgVendaProduto.setVisible(true);
+
+        }
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
+
+    private void jCboClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCboClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,9 +456,5 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtTotal;
     // End of variables declaration//GEN-END:variables
-
-
-
-
 
 }
