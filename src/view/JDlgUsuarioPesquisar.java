@@ -26,7 +26,7 @@ public class JDlgUsuarioPesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta");
+        setTitle("Pesquisa");
         usuariosControle = new UsuarioControle();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         List lista = usuarioDAO.listAll();

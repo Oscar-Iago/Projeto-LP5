@@ -149,7 +149,7 @@ public class JDlgConsultaProduto extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         consultaProduto = new ConsultaProduto();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtoDAO = new ProdutoDAO();
         
         if (jTxtNome.getText().equals("") && jTxtPreco.getText().equals("")) {
             List lista = produtoDAO.listAll();

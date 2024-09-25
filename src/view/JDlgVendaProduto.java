@@ -6,8 +6,11 @@
 package view;
 
 import bean.OibProduto;
+import bean.OibVenda;
+import bean.OibVendaproduto;
 import dao.ProdutoDAO;
 import java.util.List;
+import tools.Util;
 
 /**
  *
@@ -36,6 +39,12 @@ public class JDlgVendaProduto extends javax.swing.JDialog {
 
     public void setTelaAnterior(JDlgVenda jDlgVenda) {
         this.jDlgVenda = jDlgVenda;
+    }
+        public void beanView(OibVendaproduto oibVendaproduto, List lista) {
+        jTxtQuantidade.setText(Util.intStr(oibVendaproduto.getOibQuantidade()));
+        //jTxtValorUnitario.setText(Util.doubleStr(oibVendaproduto.getOibValorunitario()));
+        jCboProduto.setSelectedItem(oibVendaproduto.getOibProduto());
+       
     }
 
     /**

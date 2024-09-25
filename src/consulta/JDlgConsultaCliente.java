@@ -148,21 +148,25 @@ public class JDlgConsultaCliente extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         consultaCliente = new ConsultaCliente();
-        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO = new ClienteDAO();
         
         if (jTxtNome.getText().equals("") && jTxtCpf.getText().equals("")) {
             List lista = clienteDAO.listAll();
             consultaCliente.setList(lista);
+            
         } else if (!jTxtNome.getText().equals("") && jTxtCpf.getText().equals("")) {
             List lista = clienteDAO.getNome(jTxtNome.getText());
             consultaCliente.setList(lista);
+            
         } else if (!jTxtNome.getText().equals("") && !jTxtCpf.getText().equals("")) {
             List lista = clienteDAO.getNomeCpf(jTxtNome.getText(), jTxtCpf.getText());
             consultaCliente.setList(lista);
+            
         } else if (jTxtNome.getText().equals("") && !jTxtCpf.getText().equals("")) {
             List lista = clienteDAO.getCpf(jTxtCpf.getText());
             consultaCliente.setList(lista);
         }
+        
         jTable1.setModel(consultaCliente);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

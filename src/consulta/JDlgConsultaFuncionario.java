@@ -148,7 +148,7 @@ public class JDlgConsultaFuncionario extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         consultaFuncionario = new ConsultaFuncionario();
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        funcionarioDAO = new FuncionarioDAO();
         
         if (jTxtNome.getText().equals("") && jTxtFuncao.getText().equals("")) {
             List lista = funcionarioDAO.listAll();

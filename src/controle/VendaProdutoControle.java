@@ -5,6 +5,7 @@
  */
 package controle;
 
+import bean.OibVenda;
 import bean.OibVendaproduto;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -27,11 +28,15 @@ public class VendaProdutoControle extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
+    public OibVendaproduto getBean(int row) {
+        return (OibVendaproduto) lista.get(row);
+    }
+
     public void removeList(int row) {
         lista.remove(row);
         this.fireTableDataChanged();
     }
-    
+
     public OibVendaproduto getList(int index) {
         return (OibVendaproduto) lista.get(index);
     }

@@ -26,7 +26,7 @@ public class JDlgFuncionarioPesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta")
+        setTitle("Pesquisa")
                 ;
         funcionarioControle = new FuncionarioControle();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();

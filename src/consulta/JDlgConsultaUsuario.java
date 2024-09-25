@@ -143,7 +143,7 @@ public class JDlgConsultaUsuario extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         consultaUsuario = new ConsultaUsuario();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO = new UsuarioDAO();
         
         if (jTxtNome.getText().equals("") && jTxtCpf.getText().equals("")) {
             List lista = usuarioDAO.listAll();
